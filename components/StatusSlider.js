@@ -1,86 +1,55 @@
-import { View, Text, StyleSheet, Image } from "react-native";
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Color } from "../GlobalStyles";
+import React from 'react';
+import { ScrollView, TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
+import { Color, FontFamily } from '../GlobalStyles';
 
 export default function StatusSlider() {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.mystatus}>
-          <Image
-            style={styles.profileImg}
-            contentFit="cover"
-            source={require("../assets/group-39.png")}
-          />
-          <Text style={styles.title}>My status</Text>
-        </View>
-        <View style={styles.mystatus}>
-          <Image
-            style={styles.profileImg}
-            contentFit="cover"
-            source={require("../assets/group-14.png")}
-          />
-          <Text style={styles.title}>Maria</Text>
-        </View>
-        <View style={styles.mystatus}>
-          <Image
-            style={styles.profileImg}
-            contentFit="cover"
-            source={require("../assets/group-15.png")}
-          />
-          <Text style={styles.title}>Dean</Text>
-        </View>
-        <View style={styles.mystatus}>
-          <Image
-            style={styles.profileImg}
-            contentFit="cover"
-            source={require("../assets/group-17.png")}
-          />
-          <Text style={styles.title}>Max</Text>
-        </View>
-        <View style={styles.mystatus}>
-          <Image
-            style={styles.profileImg}
-            contentFit="cover"
-            source={require("../assets/group-13.png")}
-          />
-          <Text style={styles.title}>Adil</Text>
-        </View>
-      </View>
-    </SafeAreaView>
+    <View style={{ backgroundColor: '#000' }}>
+      <ScrollView horizontal={true} contentContainerStyle={styles.container} showsHorizontalScrollIndicator={false}>
+        {
+          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
+            return (
+              <TouchableOpacity onPress={() => console.log("Avinash")} key={item} style={styles.item}>
+                <View style={styles.mystatus}>
+                  <Image
+                    style={styles.profileImg}
+                    source={require("../assets/group-39.png")}
+                  />
+                  <Text style={styles.title}>My status</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          })
+        }
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.3,
     backgroundColor: Color.colorBlack,
-
-    padding: 3,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 30,
+    paddingHorizontal: 10,
+    gap: 13
   },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    alignItems: "flex-start",
-    marginTop: 2,
+  item: {
   },
   mystatus: {
-    alignItems: "flex-start",
-  },
-  title: {
-    fontWeight: "500",
-
-    color: Color.colorWhite,
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   profileImg: {
-    width: 50,
-    height: 50,
-    borderRadius: 5,
+    width: 60,
+    height: 60,
+    borderRadius: 30
+  },
+  title: {
+    fontFamily: FontFamily.caros,
+    fontSize: 14,
+    color: '#fff',
+    fontWeight: '400'
   },
 });

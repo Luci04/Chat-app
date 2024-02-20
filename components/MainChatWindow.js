@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, Pressable, Image } from "react-native";
+import { View, Text, StyleSheet, Pressable, Image, ScrollView } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import SingleChat from "./SingleChat";
+import RoundedScrollViewWrapper from "./RoundedScrollViewWrapper";
 
 export default function MainChatWindow() {
   const navigation = useNavigation();
@@ -12,37 +13,23 @@ export default function MainChatWindow() {
     navigation.navigate("Message");
   };
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <Pressable onPress={handleBackButtonPress}>
-          <SingleChat />
-        </Pressable>
-        <SingleChat />
-        <SingleChat />
-        <SingleChat />
-      </View>
-    </SafeAreaView>
+    <RoundedScrollViewWrapper>
+      <ScrollView alwaysBounceVertical={false} bouncesZoom={false} bounces={false}>
+        {
+          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
+            return <SingleChat key={item} style={{ paddingTop: item == 1 ? 40 : 0 }} index={item} />
+          })
+        }
+      </ScrollView>
+    </RoundedScrollViewWrapper>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: Color.colorBlack,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: Color.colorWhite,
-    padding: 3,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
-    overflow: "hidden",
-  },
   smallcontainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "baseline",
-    paddingHorizontal: 10, // Adjust spacing as needed
   },
   title: {
     fontWeight: "500",

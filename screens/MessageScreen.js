@@ -4,14 +4,15 @@ import { StyleSheet, SafeAreaView } from "react-native";
 import HeaderMessage from "../components/HeaderMessage";
 import ChatScreen from "./ChatScreen";
 import FooterMessage from "../components/FooterMessage";
+import SafeArea from "../components/SafeArea";
 
 const MessageScreen = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeArea style={styles.container}>
       <HeaderMessage />
       <ChatScreen style={styles.chatContainer} />
       <FooterMessage />
-    </SafeAreaView>
+    </SafeArea>
   );
 };
 

@@ -1,33 +1,42 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
+import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Color } from "../GlobalStyles";
 
 export default function Header() {
+
+  const navigation = useNavigation();
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+    <View style={styles.container}>
+      <TouchableOpacity>
         <Image
           style={styles.profileImg}
           contentFit="cover"
           source={require("../assets/group-370.png")}
         />
-        <Text style={styles.title}>Home</Text>
+      </TouchableOpacity>
+      <Text style={styles.title}>Home</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('UserScreen')}>
         <Image
           contentFit="cover"
           style={styles.profileImg}
           source={require("../assets/ellipse-307.png")}
         />
-      </View>
-    </SafeAreaView>
+      </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.2,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     backgroundColor: Color.colorBlack,
-    padding: 3,
   },
   header: {
     flexDirection: "row",
@@ -38,14 +47,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "500",
-    lineHeight: 20,
+    fontSize: 20,
     color: Color.colorWhite,
     marginLeft: 10,
     marginRight: 10,
   },
   profileImg: {
-    width: 50,
-    height: 50,
-    borderRadius: 5,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
   },
 });

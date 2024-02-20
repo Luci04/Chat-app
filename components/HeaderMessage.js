@@ -1,8 +1,8 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable, Image } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { FontFamily } from "../GlobalStyles";
+import IconComponent from "./IconComponent";
 export default function HeaderMessage() {
   const navigation = useNavigation();
 
@@ -10,56 +10,63 @@ export default function HeaderMessage() {
     navigation.navigate("HomePage");
   };
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
-        <Pressable onPress={handleBackButtonPress}>
+        <TouchableOpacity onPress={handleBackButtonPress}>
           <Image
             style={styles.backIcon}
             contentFit="cover"
             source={require("../assets/back.png")}
           />
-        </Pressable>
-        <Image
-          contentFit="cover"
-          style={styles.profileImg}
-          source={require("../assets/ellipse-307.png")}
-        />
-        <View style={styles.chatcontainer}>
+        </TouchableOpacity>
+        <View style={styles.userInfo}>
+          <Image
+            contentFit="cover"
+            style={styles.profileImg}
+            source={require("../assets/ellipse-307.png")}
+          />
           <View style={styles.smallcontainer}>
             <Text style={styles.title}>Alex Linderson</Text>
-            <Text style={styles.message}>Active Now</Text>
-          </View>
-          <View style={styles.iconcontainer}>
-            <Icon name="call-outline" size={25} style={styles.icon} />
-            <Icon name="videocam-outline" size={25} />
+            <Text style={styles.status}>Active Now</Text>
           </View>
         </View>
+        <View style={styles.iconcontainer}>
+          <TouchableOpacity>
+            <IconComponent iconType={'Feather'} iconName="phone" size={18} color="#000E08" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <IconComponent iconType={'FontAwesome'} iconName="video-camera" size={18} color="#000E08" />
+          </TouchableOpacity>
+        </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
+    paddingVertical: 10,
+    paddingHorizontal: 24
   },
   header: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
   },
   backIcon: {
     width: 24,
     height: 24,
     marginRight: 10,
   },
+  userInfo: {
+    flex: 1,
+    flexDirection: 'row'
+  },
   profileImg: {
-    width: 50,
-    height: 50,
-    borderRadius: 5,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     marginLeft: 10,
   },
   chatcontainer: {
@@ -69,21 +76,24 @@ const styles = StyleSheet.create({
   },
   smallcontainer: {
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "baseline",
     paddingHorizontal: 10,
   },
   title: {
     fontWeight: "500",
-    fontSize: 20,
+    fontFamily: FontFamily.caros,
+    color: '#000E08',
+    fontSize: 16,
   },
-  message: {
+  status: {
+    fontFamily: FontFamily.circularStd,
+    color: '#797C7B',
     fontSize: 12,
   },
   iconcontainer: {
     flexDirection: "row",
-    margin: 5,
-    padding: 5,
+    gap: 16
   },
   icon: {
     marginRight: 10,

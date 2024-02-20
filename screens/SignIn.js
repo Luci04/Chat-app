@@ -10,10 +10,6 @@ import {
   Image,
 } from "react-native";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
-import ApiConnector from "../api/apiConnector";
-import ApiEndpoints from "../api/apiEndpoints";
-import AppPaths from "../lib/appPaths";
-import CookieUtil from "../util/cookieUtil";
 import SafeArea from "../components/SafeArea";
 
 const SignIn = ({ navigation }) => {
@@ -21,26 +17,6 @@ const SignIn = ({ navigation }) => {
   const [username, setUserName] = useState("avinashukla2000@gmail.com");
   const [password, setPassword] = useState("avinashukla2000@gmail.com");
   const [loading, setLoading] = useState(false);
-
-  const onSubmit = async (loginData) => {
-
-    console.log(loginData);
-
-    const successLoginData = await ApiConnector.sendPostRequest(
-      ApiEndpoints.LOGIN_URL,
-      JSON.stringify(loginData),
-      false,
-      false
-    );
-
-    console.log(successLoginData);
-    // if (successLoginData) {
-    //   Object.keys(successLoginData).forEach((key) => {
-    //     CookieUtil.setCookie(key, successLoginData[key]);
-    //   });
-    //   window.location.href = AppPaths.HOME;
-    // }
-  };
 
   return (
     <SafeArea style={styles.container}>
@@ -109,7 +85,7 @@ const SignIn = ({ navigation }) => {
       </View>
 
       <View style={styles.bottomButtonContainer}>
-        <TouchableOpacity style={styles.loginBtn}>
+        <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('BottomNavigation')}>
           <Text style={styles.loginBtnText}>Log in</Text>
         </TouchableOpacity>
         <TouchableOpacity>

@@ -1,35 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
   TextInput,
   TouchableOpacity,
-  Pressable,
+  Keyboard
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
-import Icon from "react-native-vector-icons/Ionicons";
-import Icons from "react-native-vector-icons/Entypo";
+import IconComponent from "./IconComponent";
 
 const FooterMessage = () => {
+
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true); // Keyboard is now visible
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false); // Keyboard is now hidden
+      }
+    );
+
+    // Clean up listeners
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+
   return (
     <View style={styles.footer}>
-      <Pressable style={styles.iconContainer}>
-        <Icons name="attachment" size={24} color="#555" />
-      </Pressable>
+      <TouchableOpacity style={styles.iconContainer}>
+        <IconComponent iconType="Feather" iconName="paperclip" size={24} color="#000E08" />
+      </TouchableOpacity>
 
       <View style={styles.inputContainer}>
         <TextInput
+          multiline
           style={styles.input}
-          placeholder="Type a message..."
+          placeholder="Write your message"
           placeholderTextColor="#999"
         />
+        <TouchableOpacity style={styles.iconContainer}>
+          <IconComponent iconType={"FontAwesome"} iconName="files-o" size={24} color="#000E08" />
+        </TouchableOpacity>
       </View>
-      <Pressable style={styles.iconContainer}>
-        <Icon name="camera-outline" size={24} color="#555" />
-      </Pressable>
-      <Pressable style={styles.iconContainer}>
-        <Icon name="mic-outline" size={24} color="#555" />
-      </Pressable>
+      {
+        keyboardVisible ? <TouchableOpacity style={styles.iconContainer}>
+          <View style={{ padding: 10, backgroundColor: '#20A090', borderRadius: 999, justifyContent: 'center', alignItems: 'center ' }}>
+            <IconComponent iconType={"MaterialIcons"} iconName="send" size={24} color="#fff" />
+          </View>
+        </TouchableOpacity> : <>
+          <TouchableOpacity style={styles.iconContainer}>
+            <IconComponent iconType={"Feather"} iconName="camera" size={24} color="#000E08" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconContainer}>
+            <IconComponent iconType={"Feather"} iconName="mic" size={24} color="#000E08" />
+          </TouchableOpacity>
+        </>
+      }
+
     </View>
   );
 };
@@ -38,8 +74,7 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    padding: 20,
     borderTopWidth: 1,
     borderTopColor: "#ccc",
   },
@@ -48,15 +83,19 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    paddingHorizontal: 15,
+    backgroundColor: '#F3F6F6',
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 12,
     paddingVertical: 8,
     marginRight: 10,
   },
   input: {
-    fontSize: 16,
+    flex: 1,
+    padding: 12,
+    fontSize: 12,
     color: "#333",
   },
 });

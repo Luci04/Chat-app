@@ -11,10 +11,6 @@ import {
   Dimensions,
 } from "react-native";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
-import ApiConnector from "../api/apiConnector";
-import ApiEndpoints from "../api/apiEndpoints";
-import AppPaths from "../lib/appPaths";
-import CookieUtil from "../util/cookieUtil";
 import SafeArea from "../components/SafeArea";
 
 const SignUp = ({ navigation }) => {

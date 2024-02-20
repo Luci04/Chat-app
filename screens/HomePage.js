@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, StatusBar } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -7,18 +7,18 @@ import StatusSlider from "../components/StatusSlider";
 import MainChatWindow from "../components/MainChatWindow";
 // import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
+import SafeArea from "../components/SafeArea";
 
 export default function HomePage() {
   // const currentUser = useSelector((state) => state.auth.currentUser);
 
   // console.log(currentUser);
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeArea style={styles.container}>
       <Header />
       <StatusSlider />
       <MainChatWindow />
-      <Footer />
-    </SafeAreaView>
+    </SafeArea>
   );
 }
 
