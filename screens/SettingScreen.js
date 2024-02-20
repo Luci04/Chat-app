@@ -21,16 +21,24 @@ const SettingScreen = () => {
 
     return (
         <SafeArea style={{ backgroundColor: '#000' }}>
-            {/* <Header /> */}
-            <View style={{ flexDirection: 'row', paddingHorizontal: 18, paddingVertical: 25 }}>
-                <TouchableOpacity style={{ position: 'absolute', top: 25, left: 18, zIndex: 100 }} onPress={() => {
+            <View style={{ flexDirection: 'row', paddingHorizontal: 18, paddingVertical: 25, justifyContent: 'center', alignItems: 'center' }}>
+                <TouchableOpacity onPress={() => {
                     navigation.goBack()
                 }} >
-                    <IconComponent iconType={'Ionicons'} iconName={'arrow-back-outline'} size={24} color={'#fff'} />
+                    <View style={{ padding: 12, borderWidth: 1, borderColor: '#363F3B', borderRadius: 100 }}>
+                        <IconComponent iconType={'AntDesign'} iconName={'search1'} size={19} color={'#fff'} />
+                    </View>
                 </TouchableOpacity>
                 <Text style={{ textAlign: 'center', flex: 1, fontFamily: FontFamily.caros, fontWeight: '500', fontSize: 20, color: '#fff' }} >
                     Settings
                 </Text>
+                <TouchableOpacity disabled onPress={() => {
+                    navigation.goBack()
+                }} >
+                    <View style={{ padding: 12, borderWidth: 1, borderColor: '#000', borderRadius: 100 }}>
+                        <IconComponent iconType={'Ionicons'} iconName={'person-add'} size={19} color={'#000'} />
+                    </View>
+                </TouchableOpacity>
             </View>
             <RoundedScrollViewWrapper>
                 <View style={{ paddingVertical: 20, flexDirection: 'row', gap: 12, borderBottomWidth: 1, borderBottomColor: '#F5F6F6' }}>

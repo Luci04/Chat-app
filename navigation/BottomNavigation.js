@@ -6,6 +6,8 @@ import SettingScreen from '../screens/SettingScreen';
 import HomePage from '../screens/HomePage';
 import IconComponent from '../components/IconComponent';
 import { FontFamily } from '../GlobalStyles';
+import ContactsScreen from '../screens/ContactsScreen';
+import CallsScreen from '../screens/CallsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -45,8 +47,8 @@ const BottomNavigation = () => {
                 },
             })}   >
             <Tab.Screen name="Home" component={HomePage} />
-            <Tab.Screen name="Calls" component={SettingScreen} />
-            <Tab.Screen name="Contacts" component={SettingScreen} />
+            <Tab.Screen name="Calls" component={CallsScreen} />
+            <Tab.Screen name="Contacts" component={ContactsScreen} />
             <Tab.Screen name="Settings" component={SettingScreen} />
         </Tab.Navigator>
     )
